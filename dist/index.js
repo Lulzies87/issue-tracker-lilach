@@ -48,7 +48,8 @@ function showDetailsView() {
         currentIssue.title = e.target.elements.title.value;
         currentIssue.status = e.target.elements.status.value;
         currentIssue.assignee = e.target.elements.assignee.value;
-        currentIssue.storyPoints = parseInt(e.target.elements.storyPoints.value);
+        currentIssue.storyPoints = Number(e.target.elements.storyPoints.value);
+        currentIssue.remainingWork = Number(e.target.elements.remainingWork.value);
         currentIssue.description = e.target.elements.description.value;
         saveIssues();
     });
@@ -87,7 +88,7 @@ function showSprintBoard() {
             e.preventDefault();
             const issueId = e.dataTransfer.getData("text/plain");
             const issue = issues.find((issue) => issue.id === issueId);
-            issue.status = e.target.getAttribute("data-status");
+            issue.status = e.currentTarget.getAttribute("data-status");
             saveIssues();
             e.currentTarget.appendChild(document.querySelector(`[data-id="${issueId}"]`));
         });

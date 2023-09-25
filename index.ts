@@ -61,7 +61,8 @@ function showDetailsView() {
         currentIssue!.title = (e.target as HTMLFormElement).elements.title!.value;
         currentIssue!.status = (e.target as HTMLFormElement).elements.status!.value as Issue["status"];
         currentIssue!.assignee = (e.target as HTMLFormElement).elements.assignee!.value as Issue["assignee"];
-        currentIssue!.storyPoints = parseInt((e.target as HTMLFormElement).elements.storyPoints!.value);
+        currentIssue!.storyPoints = Number((e.target as HTMLFormElement).elements.storyPoints!.value);
+        currentIssue!.remainingWork = Number((e.target as HTMLFormElement).elements.remainingWork!.value);
         currentIssue!.description = (e.target as HTMLFormElement).elements.description!.value;
 
         saveIssues();
@@ -115,7 +116,7 @@ function showSprintBoard() {
             const issueId = e.dataTransfer.getData("text/plain");
             const issue = issues.find((issue) => issue.id === issueId)!;
 
-            issue.status = (e.target as Element).getAttribute("data-status") as Issue["status"];
+            issue.status = (e.currentTarget as Element).getAttribute("data-status") as Issue["status"];
             saveIssues();
 
             (e.currentTarget as Element).appendChild(document.querySelector(`[data-id="${issueId}"]`)!);
